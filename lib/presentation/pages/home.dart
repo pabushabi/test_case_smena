@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
                 color: Colors.black,
               ),
             )
-                : Container(),
+                : null,
           );
         },
         routes: const [

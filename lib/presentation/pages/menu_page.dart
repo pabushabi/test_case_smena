@@ -14,14 +14,26 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
-        return Center(
-          child: TextButton(
-            child: const Text("->"),
-            onPressed: () {
-              log(context.router.current.name, name: "Current route");
-              context.router.push(const CategoryRoute());
-            },
-          ),
+        return state.map(
+          initial: (_) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          loadSuccessful: (state) {
+            final menu = state.data.menu;
+            return GridView.count(
+              crossAxisCount: 2,
+              children: List.generate(
+                menu.length,
+                (index) => GestureDetector(
+                  child: Text(menu[index].categoryName),
+                  onTap: () =>
+                      context.router.push(CategoryRoute(category: menu[index])),
+                ),
+              ),
+            );
+          },
         );
       },
     );

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
-import 'package:test_case_smena/core/models/category.dart';
 import 'package:dio/dio.dart';
 
 import '../models/menu.dart';
@@ -16,8 +15,6 @@ class MenuRepository {
   Future<Menu> getMenu() async {
     final response = await _dio.get(_apiUrl);
     final list = Menu.fromJson(jsonDecode(response.data));
-    // final list = jsonDecode(response.data);
-    // log("${list.menu[0].categoryName}", name: "response");
     return list;
   }
 }
