@@ -13,7 +13,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AppBloc>()..add(const AppEvent.dataRequested()),
+      create: (context) =>
+          getIt<AppBloc>()..add(const AppEvent.dataRequested()),
       child: AutoTabsScaffold(
         backgroundColor: Colors.white,
         appBarBuilder: (context, router) {
@@ -30,12 +31,12 @@ class Home extends StatelessWidget {
             ),
             leading: router.current.name == BasketRoute.name
                 ? IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-            )
+                    onPressed: () => context.router.pop(),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                  )
                 : null,
           );
         },
@@ -47,6 +48,7 @@ class Home extends StatelessWidget {
           return BottomNavigationBar(
             currentIndex: router.activeIndex,
             onTap: router.setActiveIndex,
+            backgroundColor: Colors.white,
             selectedItemColor: Colors.black,
             unselectedItemColor: Colors.black38,
             items: const [
@@ -59,7 +61,6 @@ class Home extends StatelessWidget {
                 label: "Корзина",
               ),
             ],
-            backgroundColor: Colors.white,
           );
         },
       ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_case_smena/core/blocs/app/app_bloc.dart';
+import 'package:test_case_smena/presentation/widgets/category_widget.dart';
 
 import '../../config/app_router.gr.dart';
 
@@ -24,12 +25,17 @@ class MenuPage extends StatelessWidget {
             final menu = state.data.menu;
             return GridView.count(
               crossAxisCount: 2,
+              padding: const EdgeInsets.all(16),
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              physics: const BouncingScrollPhysics(),
               children: List.generate(
                 menu.length,
-                (index) => GestureDetector(
-                  child: Text(menu[index].categoryName),
-                  onTap: () =>
-                      context.router.push(CategoryRoute(category: menu[index])),
+                (index) => CategoryWidget(
+                  category: menu[index],
+                  onTap: () => context.router.push(
+                    CategoryRoute(category: menu[index]),
+                  ),
                 ),
               ),
             );
