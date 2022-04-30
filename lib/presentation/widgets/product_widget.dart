@@ -20,7 +20,10 @@ class ProductWidget extends StatelessWidget {
         Image.network(product.imageUrl),
         Text(
           product.name,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -42,7 +45,7 @@ class ProductWidget extends StatelessWidget {
                   child: Center(
                     child: Ink(
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: const Color.fromRGBO(63, 195, 0, 1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: IconButton(

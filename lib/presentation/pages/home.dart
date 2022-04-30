@@ -3,6 +3,7 @@ import 'package:test_case_smena/config/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:test_case_smena/config/injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_case_smena/core/blocs/basket/basket_bloc.dart';
 
 import '../../config/app_router.gr.dart';
 import '../../core/blocs/app/app_bloc.dart';
@@ -12,9 +13,17 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getIt<AppBloc>()..add(const AppEvent.dataRequested()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              getIt<AppBloc>()..add(const AppEvent.dataRequested()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              getIt<BasketBloc>()..add(const BasketEvent.basketInitialized()),
+        ),
+      ],
       child: AutoTabsScaffold(
         backgroundColor: Colors.white,
         appBarBuilder: (context, router) {

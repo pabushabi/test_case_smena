@@ -25,6 +25,7 @@ class MenuPage extends StatelessWidget {
             final menu = state.data.menu;
             return GridView.count(
               crossAxisCount: 2,
+              childAspectRatio: 163 / 175,
               padding: const EdgeInsets.all(16),
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,

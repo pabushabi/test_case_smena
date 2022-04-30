@@ -34,10 +34,16 @@ class CategoryWidget extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 18, top: 4),
+                padding: const EdgeInsets.only(
+                  left: 18,
+                  top: 8,
+                ),
                 child: Text(
                   category.categoryName,
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
