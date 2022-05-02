@@ -12,8 +12,8 @@ class BasketPage extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: List.generate(
-            state.products.length,
-            (index) => Text(state.products[index].name),
+            state.basket.itemsCount,
+            (index) => Text(state.basket.items[index].name),
           ),
         );
       },

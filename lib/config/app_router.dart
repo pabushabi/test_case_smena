@@ -9,14 +9,27 @@ import 'package:test_case_smena/presentation/pages/menu_page.dart';
   routes: [
     AutoRoute(
       page: Home,
+      path: "/",
       initial: true,
       children: [
-        AutoRoute(page: MenuPage),
-        AutoRoute(page: BasketPage),
+        AutoRoute(
+          page: MenuPage,
+          path: "menu",
+          children: [
+            AutoRoute(
+              page: CategoryPage,
+              path: "menu/category/:name",
+            ),
+          ],
+        ),
+        AutoRoute(
+          page: BasketPage,
+          path: "basket",
+        ),
         // AutoRoute(page: CategoryPage),
       ],
     ),
-    AutoRoute(page: CategoryPage),
+    // AutoRoute(page: CategoryPage),
   ],
 )
 class $AppRouter {}

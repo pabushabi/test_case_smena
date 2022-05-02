@@ -32,7 +32,8 @@ class Home extends StatelessWidget {
             elevation: 0,
             toolbarHeight: 76,
             title: Text(
-              router.current.name == "MenuRoute" ? "Столовка" : "Корзина",
+              // router.current.name == "MenuRoute" ? "Столовка" : "Корзина",
+              router.current.name,
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
