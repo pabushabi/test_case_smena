@@ -34,8 +34,8 @@ class MenuPage extends StatelessWidget {
                 menu.length,
                 (index) => CategoryWidget(
                   category: menu[index],
-                  onTap: () => context.router.pushAll(
-                    [MenuRoute(),CategoryRoute(category: menu[index])],
+                  // onTap: () => context.navigateTo(CategoryRoute(category: menu[index]),
+                  onTap: () => context.router.push(CategoryRoute(category: menu[index]),
                   ),
                 ),
               ),

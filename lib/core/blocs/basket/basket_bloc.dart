@@ -15,21 +15,16 @@ part 'basket_bloc.freezed.dart';
 
 @injectable
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
-  List<Product> products = [];
   final Basket basket;
   BasketBloc(this.basket) : super(BasketState(basket)) {
     on<BasketEvent>((event, emit) async {
       await event.map(
-        basketInitialized: (_) {},
         basketRequested: (_) {
           emit(BasketState(basket));
-          // emit(state.copyWith(products: products));
         },
         productAdded: (_) {
-          // products.add(_.product);
           basket.addItem(_.product);
           emit(BasketState(basket));
-          // emit(state.copyWith(products: products));
         },
         productRemoved: (_) {
           basket.removeItem(_.product);

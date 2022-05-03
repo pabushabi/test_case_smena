@@ -8,28 +8,33 @@ import 'package:test_case_smena/presentation/pages/menu_page.dart';
   replaceInRouteName: "Page,Route",
   routes: [
     AutoRoute(
+      path: '/',
       page: Home,
-      path: "/",
-      initial: true,
       children: [
         AutoRoute(
-          page: MenuPage,
           path: "menu",
+          name: "MenuRouter",
+          page: EmptyRouterPage,
           children: [
             AutoRoute(
+              path: '',
+              page: MenuPage,
+              initial: true,
+            ),
+            AutoRoute(
+              path: ":category",
               page: CategoryPage,
-              path: "menu/category/:name",
             ),
           ],
         ),
         AutoRoute(
-          page: BasketPage,
           path: "basket",
+          name: "BasketRouter",
+          page: BasketPage,
         ),
-        // AutoRoute(page: CategoryPage),
       ],
     ),
-    // AutoRoute(page: CategoryPage),
+    RedirectRoute(path: '*', redirectTo: '/'),
   ],
 )
 class $AppRouter {}

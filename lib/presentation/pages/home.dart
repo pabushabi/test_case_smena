@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              getIt<BasketBloc>()..add(const BasketEvent.basketInitialized()),
+              getIt<BasketBloc>()..add(const BasketEvent.basketRequested()),
         ),
       ],
       child: AutoTabsScaffold(
@@ -32,14 +32,14 @@ class Home extends StatelessWidget {
             elevation: 0,
             toolbarHeight: 76,
             title: Text(
-              // router.current.name == "MenuRoute" ? "Столовка" : "Корзина",
-              router.current.name,
+              router.current.name == "MenuRouter" ? "Столовка" : "Корзина",
+              // router.current.route.name,
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            leading: router.current.name == BasketRoute.name
+            leading: router.current.name == BasketRouter.name
                 ? IconButton(
                     onPressed: () => context.router.pop(),
                     icon: const Icon(
@@ -51,8 +51,8 @@ class Home extends StatelessWidget {
           );
         },
         routes: const [
-          MenuRoute(),
-          BasketRoute(),
+          MenuRouter(),
+          BasketRouter(),
         ],
         bottomNavigationBuilder: (context, router) {
           return BottomNavigationBar(

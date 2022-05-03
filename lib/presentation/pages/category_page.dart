@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_case_smena/core/blocs/basket/basket_bloc.dart';
@@ -11,35 +13,23 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          category.categoryName,
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 76,
-      ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 2 / 2.4,
-        padding: const EdgeInsets.all(16),
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        physics: const BouncingScrollPhysics(),
-        children: List.generate(
-          category.products.length,
-          (index) => ProductWidget(
-            product: category.products[index],
-            onTap: () {
-              context.read<BasketBloc>().add(BasketEvent.productAdded(category.products[index]));
-            },
-          ),
+    return GridView.count(
+      crossAxisCount: 2,
+      childAspectRatio: 2 / 2.4,
+      padding: const EdgeInsets.all(16),
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      physics: const BouncingScrollPhysics(),
+      children: List.generate(
+        category.products.length,
+        (index) => ProductWidget(
+          product: category.products[index],
+          onTap: () {
+            log("${context.read<BasketBloc>().state.basket.items}", name: "tapping");
+            context
+                .read<BasketBloc>()
+                .add(BasketEvent.productAdded(category.products[index]));
+          },
         ),
       ),
     );
