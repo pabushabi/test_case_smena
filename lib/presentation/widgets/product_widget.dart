@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/models/product.dart';
@@ -17,7 +18,13 @@ class ProductWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.network(product.imageUrl),
+        CachedNetworkImage(
+          imageUrl: product.imageUrl,
+          progressIndicatorBuilder: (context, url, progress) =>
+              CircularProgressIndicator(
+            value: progress.progress,
+          ),
+        ),
         Text(
           product.name,
           style: const TextStyle(

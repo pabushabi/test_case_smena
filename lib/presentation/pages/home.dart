@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
             ),
             leading: router.current.name == BasketRouter.name
                 ? IconButton(
-                    onPressed: () => context.router.pop(),
+                    onPressed: () => context.router.pushNamed("/"),
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,

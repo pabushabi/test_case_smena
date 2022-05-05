@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_case_smena/core/blocs/basket/basket_bloc.dart';
@@ -25,7 +23,6 @@ class CategoryPage extends StatelessWidget {
         (index) => ProductWidget(
           product: category.products[index],
           onTap: () {
-            log("${context.read<BasketBloc>().state.basket.items}", name: "tapping");
             context
                 .read<BasketBloc>()
                 .add(BasketEvent.productAdded(category.products[index]));

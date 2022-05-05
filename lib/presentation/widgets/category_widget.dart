@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/models/category.dart';
@@ -30,7 +31,13 @@ class CategoryWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.network(category.imageUrl),
+            CachedNetworkImage(
+              imageUrl: category.imageUrl,
+              progressIndicatorBuilder: (context, url, progress) =>
+                  CircularProgressIndicator(
+                value: progress.progress,
+              ),
+            ),
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(

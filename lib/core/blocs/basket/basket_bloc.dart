@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,19 +17,31 @@ part 'basket_bloc.freezed.dart';
 @injectable
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
   final Basket basket;
-  BasketBloc(this.basket) : super(BasketState(basket)) {
-    on<BasketEvent>((event, emit) async {
-      await event.map(
+
+  BasketBloc(this.basket) : super(const BasketState.empty()) {
+    on<BasketEvent>((event, emit) {
+      event.map(
         basketRequested: (_) {
-          emit(BasketState(basket));
+          emit(const BasketState.loading());
+          if (basket.items.isEmpty) {
+            emit(const BasketState.empty());
+          } else {
+            emit(BasketState.filled(basket: basket));
+          }
         },
         productAdded: (_) {
+          emit(const BasketState.loading());
           basket.addItem(_.product);
-          emit(BasketState(basket));
+          emit(BasketState.filled(basket: basket));
         },
         productRemoved: (_) {
+          emit(const BasketState.loading());
           basket.removeItem(_.product);
-          emit(BasketState(basket));
+          if (basket.items.isEmpty) {
+            emit(const BasketState.empty());
+          } else {
+            emit(BasketState.filled(basket: basket));
+          }
         },
       );
     });

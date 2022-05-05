@@ -5,9 +5,11 @@ class BasketItemWidget extends StatelessWidget {
   const BasketItemWidget({
     Key? key,
     required this.product,
+    required this.onTapDelete,
   }) : super(key: key);
 
   final Product product;
+  final VoidCallback onTapDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +25,40 @@ class BasketItemWidget extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.network(
-              product.imageUrl,
-              width: 59,
-            ),
-            const SizedBox(width: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(product.name),
-                Text(
-                  "${product.cost} ₽",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                  ),
+                Image.network(
+                  product.imageUrl,
+                  width: 59,
                 ),
-                Row(
+                const SizedBox(width: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(product.name),
+                    Text(
+                      "${product.cost} ₽",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                     Text(product.sizes),
-                    const SizedBox(width: 199),
-                    Text("${product.id} шт."), //TODO
                   ],
                 ),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: onTapDelete,
+                  icon: const Icon(Icons.delete_outline),
+                ),
+                Text("${product.count} шт."),
               ],
             ),
           ],

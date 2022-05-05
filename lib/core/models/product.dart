@@ -11,6 +11,7 @@ class Product {
   final int cost;
   final String sizes;
   final int categoryId;
+  int count;
 
   Product(
     this.id,
@@ -18,8 +19,10 @@ class Product {
     this.imageUrl,
     this.cost,
     this.sizes,
-    this.categoryId,
-  );
+    this.categoryId, {
+    this.count = 1,
+  });
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 }

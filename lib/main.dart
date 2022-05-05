@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:test_case_smena/config/app_router.dart';
 import 'config/app_bloc_observer.dart';
 import 'config/app_router.gr.dart';
 import 'config/injection.dart';
