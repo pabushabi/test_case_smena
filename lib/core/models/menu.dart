@@ -10,4 +10,6 @@ class Menu {
   Menu(this.menu);
 
   factory Menu.fromJson(Map<String, dynamic> json) => _$MenuFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MenuToJson(this);
 }
