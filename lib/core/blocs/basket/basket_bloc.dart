@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -29,7 +26,6 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
           emit(const BasketState.loading());
           if (await basketRepo.isBasketSaved()) {
             basket = await basketRepo.restoreBasket();
-            log("${basket.itemsCount}", name: "basket");
           } else {
             basket = Basket.empty();
           }

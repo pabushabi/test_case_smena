@@ -11,22 +11,25 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 2 / 2.4,
-      padding: const EdgeInsets.all(16),
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      physics: const BouncingScrollPhysics(),
-      children: List.generate(
-        category.products.length,
-        (index) => ProductWidget(
-          product: category.products[index],
-          onTap: () {
-            context
-                .read<BasketBloc>()
-                .add(BasketEvent.productAdded(category.products[index]));
-          },
+    return BlocListener<BasketBloc, BasketState>(
+      listener: (context, state) {},
+      child: GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: 2 / 2.4,
+        padding: const EdgeInsets.all(16),
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        physics: const BouncingScrollPhysics(),
+        children: List.generate(
+          category.products.length,
+              (index) =>
+              ProductWidget(
+                product: category.products[index],
+                onTap: () {
+                  context.read<BasketBloc>()
+                    .add(BasketEvent.productAdded(category.products[index]));
+                },
+              ),
         ),
       ),
     );

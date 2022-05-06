@@ -32,16 +32,25 @@ class Home extends StatelessWidget {
             elevation: 0,
             toolbarHeight: 76,
             title: Text(
-              router.current.name == "MenuRouter" ? "Столовка" : "Корзина",
-              // router.current.route.name,
+              router.topRoute.path == ""
+                  ? "Столовка"
+                  : router.topRoute.path == "basket"
+                      ? "Корзина"
+                      : "Категория",
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            leading: router.current.name == BasketRouter.name
+            leading: router.topRoute.path != ""
                 ? IconButton(
-                    onPressed: () => context.router.pushNamed("/"),
+                    onPressed: () {
+                      if (router.topRoute.path == "basket") {
+                        context.router.pushNamed("/");
+                      } else {
+                        context.router.navigate(const MenuRoute());
+                      }
+                    },
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,

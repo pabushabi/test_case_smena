@@ -5,7 +5,7 @@ import 'package:test_case_smena/core/models/product.dart';
 part 'basket.g.dart';
 
 @LazySingleton()
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(createToJson: false)
 class Basket {
   late List<Product> items;
   late int itemsCount;
@@ -61,5 +61,9 @@ class Basket {
 
   factory Basket.fromJson(Map<String, dynamic> json) => _$BasketFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BasketToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        '"items"': items.map((e) => e.toJson()).toList(),
+        '"itemsCount"': itemsCount,
+        '"totalPrice"': totalPrice,
+      };
 }

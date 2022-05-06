@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
 
-@JsonSerializable()
-class Product {
+@JsonSerializable(createToJson: false)
+class Product extends Equatable {
   final int id;
   final String name;
   @JsonKey(name: "image_url")
@@ -26,5 +27,16 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        '"id"': id,
+        '"name"': '"$name"',
+        '"image_url"': '"$imageUrl"',
+        '"cost"': cost,
+        '"sizes"': '"$sizes"',
+        '"categoryId"': categoryId,
+        '"count"': count,
+      };
+
+  @override
+  List<Object?> get props => [id, name, imageUrl, cost, sizes, categoryId];
 }
